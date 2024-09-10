@@ -461,7 +461,7 @@ public class SerObjectView {
             p -= 20;
             if (array) pojo.add(A);
             else {
-              tFields.replace(n, "double["+dim1+"]["+dim2+"]["+le+"]");
+              tFields.replace(n, "String["+dim1+"]["+dim2+"]["+le+"]");
               vFields.put(n, A);
             }
           }
@@ -469,8 +469,11 @@ public class SerObjectView {
           if ("[S".equals(at)) {
             short A[] = new short[le];
             for (int a = 0; a < le; ++a) A[a] = getShort();
-            tFields.replace(n, "short["+le+"]");
-            vFields.put(n, A);  
+            if (array) pojo.add(A);
+            else {
+              tFields.replace(n, "short["+le+"]");
+              vFields.put(n, A);  
+            }
           } else if ("[[S".equals(at)) {
             short A[][] = new short[dim1][le];
             for (int a = 0; a < dim1; ++a) {
@@ -541,7 +544,7 @@ public class SerObjectView {
             p -= 20;
             if (array) pojo.add(A);
             else {
-              tFields.replace(n, "double["+dim1+"]["+dim2+"]["+le+"]");
+              tFields.replace(n, "float["+dim1+"]["+dim2+"]["+le+"]");
               vFields.put(n, A); 
             }
           } 
@@ -549,8 +552,11 @@ public class SerObjectView {
           if ("[B".equals(at)) {
             byte A[] = new byte[le];
             for (int a = 0; a < le; ++a) A[a] = bb[p++];
-            tFields.replace(n, "byte["+le+"]");
-            vFields.put(n, A);  
+            if (array) pojo.add(A);
+            else {
+              tFields.replace(n, "byte["+le+"]");
+              vFields.put(n, A);  
+            }
           } else if ("[[B".equals(at)) {
             byte A[][] = new byte[dim1][le];
             for (int a = 0; a < dim1; ++a) {
