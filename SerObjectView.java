@@ -699,7 +699,6 @@ public class SerObjectView {
           int len = le;
           int d1 = dim1;
           int d2 = dim2;
-          t = t.replace(";", "");
           tSaved = new HashMap<>(tFields);
           vSaved = new HashMap<>(vFields);
           nSaved = new ArrayList<>(fNames);
