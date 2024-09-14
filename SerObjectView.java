@@ -47,6 +47,17 @@ public class SerObjectView {
     byte[] ID = { (byte)0xAC, (byte)0xED, (byte)0x00, (byte)0x05, (byte)0x73, (byte)0x72 };  
     for (p = 0, ref = 0; p < ID.length; ++p) 
     if (bb[p] != ID[p]) throw new Exception("Byte array is not a serialized object");
+    //
+    pojo.clear(); 
+    nRef.clear(); 
+    vRef.clear();
+    fNames.clear(); 
+    pNames.clear();
+    pFields.clear();
+    vFields.clear();
+    tFields.clear();
+    ptFields.clear();
+    //
     view(bb, p, false, false);
   }
   /**
