@@ -45,7 +45,7 @@ public class SerObjectView {
   public void view(byte[] bb) throws Exception {
     // Java Serialized Object Signature
     byte[] ID = { (byte)0xAC, (byte)0xED, (byte)0x00, (byte)0x05, (byte)0x73, (byte)0x72 };  
-    for (p = 0, ref = 0; p < ID.length; ++p) 
+    for (p = 0; p < ID.length; ++p) 
     if (bb[p] != ID[p]) throw new Exception("Byte array is not a serialized object");
     //
     pojo.clear(); 
@@ -58,6 +58,7 @@ public class SerObjectView {
     tFields.clear();
     ptFields.clear();
     //
+    ref = cnt = nFields = 0;
     view(bb, p, false, false);
   }
   /**
