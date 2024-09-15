@@ -43,6 +43,7 @@ public class SerObjectView {
   @exception Exception thrown by JAVA (e.g. IOException, etc.)
   */
   public void view(byte[] bb) throws Exception {
+    if (bb == null) throw new Exception("Exception: byte array is null!");
     // Java Serialized Object Signature
     byte[] ID = { (byte)0xAC, (byte)0xED, (byte)0x00, (byte)0x05, (byte)0x73, (byte)0x72 };  
     for (p = 0; p < ID.length; ++p) 
