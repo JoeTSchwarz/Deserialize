@@ -725,7 +725,7 @@ public class SerObjectView {
           case "Byte":
             list.add(bb[p++]);
             break;
-          case "Char":
+          case "Character":
             list.add(getChar());
             break;
           case "Boolean":
