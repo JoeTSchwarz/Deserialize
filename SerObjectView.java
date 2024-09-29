@@ -386,6 +386,7 @@ public class SerObjectView {
                 for (int c = 0; c < le; ++c) {
                   TTT[a][b][c] = getReference();
                 }
+                onLoop();
               }
             }
             tFields.replace(n, "String["+dim1+"]["+dim2+"]["+le+"]");
@@ -871,20 +872,24 @@ public class SerObjectView {
       String s = getString();
       vRef.put(++ref, s);
       nRef.add(ref); // check for end loop
-      if (p < bb.length && bb[p] == TC_ARRAY && bb[p+1] == TC_REFERENCE) {
-        p += 4; // TC_ARRAY + TC_REFERENCE + x00 + TC_ENUM
-        ++cnt; // count the reloop
-        delta = getShort() + cnt;
-        p += 4; // #Of_Elements
-      }
+      onLoop();
       return s;
     }
     if (bb[p] == TC_REFERENCE) {
-      p += 3;
+      p += 3; // TC_REFERENCE + x00 + TC_ENUM
       int x = getShort()-delta;
       if (nRef.contains(x)) return (String)vRef.get(x);
     }
     return null;
+  }
+  //
+  private void onLoop() {
+    if (p < bb.length && bb[p] == TC_ARRAY && bb[p+1] == TC_REFERENCE) {
+      p += 4; // TC_ARRAY + TC_REFERENCE + x00 + TC_ENUM
+      ++cnt; // count the reloop
+      delta = getShort() + cnt;
+      p += 4; // #Of_Elements
+    }
   }
   //
   private void setValue(String oN, Object oV, String oT) {
